@@ -4,17 +4,18 @@ import PropTypes from 'prop-types';
 function InteractiveButtons(props) {
   let sleepButtonText = null;
   if(props.tamagotchi.sleeping === true && props.tamagotchi.alive === true) {
-    sleepButtonText = 'Wake Up';
+    sleepButtonText = <button onClick={props.onSleep}>Sleep</button>;
   } else if(props.tamagotchi.sleeping === false && props.tamagotchi.alive === true) {
-    sleepButtonText = 'Take A Nap';
+    sleepButtonText = <button onClick={props.onSleep}>Take A Nap</button>;
   } else {
-    sleepButtonText = 'Reset';
+    sleepButtonText = <button onClick={props.onReset}>Reset</button>;
   }
   return(
     <div>
       <button onClick={props.onFeed}>Feed</button>
       <button onClick={props.onPlay}>Play</button>
-      <button onClick={props.onSleep}>{sleepButtonText}</button>
+      {sleepButtonText}
+
     </div>
   );
 }
@@ -23,6 +24,7 @@ InteractiveButtons.propTypes = {
   onFeed: PropTypes.func,
   onPlay: PropTypes.func,
   onSleep: PropTypes.func,
+  onReset: PropTypes.func,
   tamagotchi: PropTypes.object
 };
 

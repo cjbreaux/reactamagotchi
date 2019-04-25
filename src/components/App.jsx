@@ -28,6 +28,7 @@ class App extends React.Component {
     this.handleSleep = this.handleSleep.bind(this);
     this.handleMood = this.handleMood.bind(this);
     this.handleAging = this.handleAging.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
 
 
@@ -85,8 +86,10 @@ class App extends React.Component {
 
   handleAging() {
     let updatedStats = Object.assign({}, this.state.tamagotchi);
-    updatedStats.age++;
-    this.setState({tamagotchi: updatedStats});
+    if (updatedStats.alive) {
+      updatedStats.age++;
+      this.setState({tamagotchi: updatedStats});
+    }
   }
 
   handleMood() {
@@ -108,6 +111,22 @@ class App extends React.Component {
     }
   }
 
+
+  handleReset() {
+    let updatedStats = Object.assign({}, this.state.tamagotchi);
+    if (!updatedStats.alive) {
+      updatedStats.age = 0;
+      updatedStats.name = this.chance.name({middle_initial: true});
+      updatedStats.hunger = 30;
+      updatedStats.happiness = 50;
+      updatedStats.energy = 100;
+      updatedStats.sleeping = false;
+      updatedStats.mood = 'happy';
+      updatedStats.alive = true;
+      this.setState({tamagotchi: updatedStats});
+    }
+  }
+
   render(){
     return(
       <div>
@@ -117,7 +136,8 @@ class App extends React.Component {
           tamagotchi={this.state.tamagotchi}
           onFeed={this.handleFeed}
           onPlay={this.handlePlay}
-          onSleep={this.handleSleep} />
+          onSleep={this.handleSleep}
+          onReset={this.handleReset} />
       </div>
     );
   }
