@@ -9,6 +9,7 @@ function PetView(props) {
       <p>Weight: {props.tamagotchi.weight}</p>
       <p>Hunger: {props.tamagotchi.hunger}</p>
       <p>Happiness: {props.tamagotchi.happiness}</p>
+      <p>Energy: {props.tamagotchi.energy}</p>
     </div>
   );
 }

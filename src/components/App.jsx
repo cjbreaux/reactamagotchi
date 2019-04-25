@@ -19,6 +19,7 @@ class App extends React.Component {
     };
     this.handleUpdateStats = this.handleUpdateStats.bind(this);
     this.handleFeed = this.handleFeed.bind(this);
+    this.handlePlay = this.handlePlay.bind(this);
     this.handleSleep = this.handleSleep.bind(this);
   }
 
@@ -26,13 +27,21 @@ class App extends React.Component {
 
   handleUpdateStats() {
     let updatedStats = Object.assign({}, this.state.tamagotchi);
-    if(updatedStats.hunger != 0) {
-      updatedStats.hunger--;
+    if(updatedStats.energy != 0) {
+      updatedStats.energy--;
       this.setState({tamagotchi: updatedStats});
     }
   }
 
   handleFeed() {
+    let updatedStats = Object.assign({}, this.state.tamagotchi);
+    if(updatedStats.hunger != 0 ) {
+      updatedStats.hunger--;
+      this.setState({tamagotchi: updatedStats});
+    }
+  }
+
+  handlePlay() {
     let updatedStats = Object.assign({}, this.state.tamagotchi);
     if(updatedStats.happiness != 10 ) {
       updatedStats.happiness++;
@@ -44,9 +53,7 @@ class App extends React.Component {
     let updatedStats = Object.assign({}, this.state.tamagotchi);
     updatedStats.sleeping = !updatedStats.sleeping;
     this.setState({tamagotchi: updatedStats});
-
   }
-
 
   render(){
     return(
@@ -55,6 +62,7 @@ class App extends React.Component {
         <InteractiveButtons
           tamagotchi={this.state.tamagotchi}
           onUpdateStats={this.handleUpdateStats} onFeed={this.handleFeed}
+          onPlay={this.handlePlay}
           onSleep={this.handleSleep} />
       </div>
     );

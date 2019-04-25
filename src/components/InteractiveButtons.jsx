@@ -10,8 +10,8 @@ function InteractiveButtons(props) {
   }
   return(
     <div>
-      <button onClick={props.onUpdateStats}>Feed</button>
-      <button onClick={props.onFeed}>Play</button>
+      <button onClick={props.onFeed}>Feed</button>
+      <button onClick={props.onPlay}>Play</button>
       <button onClick={props.onSleep}>{sleepButtonText}</button>
     </div>
   );
