@@ -15,6 +15,7 @@ class App extends React.Component {
         happiness: 50,
         energy: 100,
         sleeping: false,
+        mood: 'stoked',
         alive: true
       }
     };
@@ -22,12 +23,17 @@ class App extends React.Component {
     this.handleFeed = this.handleFeed.bind(this);
     this.handlePlay = this.handlePlay.bind(this);
     this.handleSleep = this.handleSleep.bind(this);
+    this.handleMood = this.handleMood.bind(this);
   }
 
   componentDidMount() {
     this.intervalEnergy = setInterval(() =>
       this.handleUpdateEnergy(),
     1000
+    );
+    this.intervalMood = setInterval(() =>
+      this.handleMood(),
+    100
     );
   }
 
@@ -68,10 +74,26 @@ class App extends React.Component {
     this.setState({tamagotchi: updatedStats});
   }
 
+  handleMood() {
+    let updatedStats = Object.assign({}, this.state.tamagotchi);
+    if(updatedStats.alive) {
+      if(updatedStats.energy >= 80 && updatedStats.happiness >= 50) {
+        updatedStats.mood = 'stoked';
+      } else if (updatedStats.energy < 80 && updatedStats.energy >= 50 ) {
+        updatedStats.mood = 'happy';
+      } else if (updatedStats.energy < 50 && updatedStats.energy >= 30) {
+        updatedStats.mood = 'sad';
+      } else if (updatedStats.energy < 30 && updatedStats.energy >0) {
+        updatedStats.mood = 'stressed';
+      }
+      this.setState({tamagotchi: updatedStats});
+    }
+  }
+
   render(){
     return(
       <div>
-        <DynamicImage />
+        <DynamicImage tamagotchi={this.state.tamagotchi}/>
         <PetStats tamagotchi={this.state.tamagotchi}/>
         <InteractiveButtons
           tamagotchi={this.state.tamagotchi}
