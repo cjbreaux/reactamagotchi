@@ -1,5 +1,5 @@
 import React from 'react';
-import PetView from './PetView';
+import PetStats from './PetStats';
 import InteractiveButtons from './InteractiveButtons';
 
 class App extends React.Component {
@@ -38,7 +38,7 @@ class App extends React.Component {
       updatedStats.energy-=10;
     } else if (updatedStats.energy != 0 && updatedStats.sleeping === true && updatedStats.energy != 100) {
       updatedStats.energy+=10;
-    } else if (updatedStats.energy === 0) {
+    } else if (updatedStats.energy <= 0) {
       updatedStats.alive = false;
     }
     this.setState({tamagotchi: updatedStats});
@@ -46,8 +46,8 @@ class App extends React.Component {
 
   handleFeed() {
     let updatedStats = Object.assign({}, this.state.tamagotchi);
-    if(updatedStats.hunger != 0 && updatedStats.sleeping === false && updatedStats.alive === true) {
-      updatedStats.hunger+=10;
+    if(updatedStats.hunger >= 0 && updatedStats.sleeping === false && updatedStats.alive === true) {
+      updatedStats.hunger-=10;
       this.setState({tamagotchi: updatedStats});
     }
   }
@@ -70,7 +70,7 @@ class App extends React.Component {
   render(){
     return(
       <div>
-        <PetView tamagotchi={this.state.tamagotchi}/>
+        <PetStats tamagotchi={this.state.tamagotchi}/>
         <InteractiveButtons
           tamagotchi={this.state.tamagotchi}
           onFeed={this.handleFeed}

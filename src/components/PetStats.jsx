@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function PetView(props) {
+function PetStats(props) {
   return(
     <div>
       <h1>this is the petview</h1>
@@ -13,8 +13,8 @@ function PetView(props) {
     </div>
   );
 }
-PetView.propTypes = {
+PetStats.propTypes = {
   tamagotchi: PropTypes.object
 };
 
-export default PetView;
+export default PetStats;
