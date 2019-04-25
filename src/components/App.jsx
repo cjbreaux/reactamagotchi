@@ -1,6 +1,7 @@
 import React from 'react';
 import PetStats from './PetStats';
 import InteractiveButtons from './InteractiveButtons';
+import DynamicImage from './DynamicImage';
 
 class App extends React.Component {
   constructor (props) {
@@ -70,6 +71,7 @@ class App extends React.Component {
   render(){
     return(
       <div>
+        <DynamicImage />
         <PetStats tamagotchi={this.state.tamagotchi}/>
         <InteractiveButtons
           tamagotchi={this.state.tamagotchi}
