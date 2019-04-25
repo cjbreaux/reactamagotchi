@@ -61,9 +61,6 @@ class App extends React.Component {
   handleSleep() {
     let updatedStats = Object.assign({}, this.state.tamagotchi);
     updatedStats.sleeping = !updatedStats.sleeping;
-    // if(updatedStats.sleeping === true) {
-    //   updatedStats.energy = 10;
-    // }
     this.setState({tamagotchi: updatedStats});
   }
 
