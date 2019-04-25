@@ -38,13 +38,15 @@ class App extends React.Component {
       updatedStats.energy-=10;
     } else if (updatedStats.energy != 0 && updatedStats.sleeping === true && updatedStats.energy != 100) {
       updatedStats.energy+=10;
+    } else if (updatedStats.energy === 0) {
+      updatedStats.alive = false;
     }
     this.setState({tamagotchi: updatedStats});
   }
 
   handleFeed() {
     let updatedStats = Object.assign({}, this.state.tamagotchi);
-    if(updatedStats.hunger != 0 && updatedStats.sleeping === false && updatedStats.energy != 0) {
+    if(updatedStats.hunger != 0 && updatedStats.sleeping === false && updatedStats.alive === true) {
       updatedStats.hunger+=10;
       this.setState({tamagotchi: updatedStats});
     }
@@ -52,7 +54,7 @@ class App extends React.Component {
 
   handlePlay() {
     let updatedStats = Object.assign({}, this.state.tamagotchi);
-    if( updatedStats.happiness != 100 && updatedStats.sleeping === false && updatedStats.energy != 0) {
+    if( updatedStats.happiness != 100 && updatedStats.sleeping === false && updatedStats.alive === true) {
       updatedStats.happiness+=10;
       updatedStats.energy-=10;
       this.setState({tamagotchi: updatedStats});
