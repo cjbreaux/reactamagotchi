@@ -13,7 +13,7 @@ function PetView(props) {
   );
 }
 PetView.propTypes = {
-  tamagotchi: PropTypes.object,
+  tamagotchi: PropTypes.object
 };
 
 export default PetView;
