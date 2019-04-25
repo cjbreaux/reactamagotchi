@@ -8,7 +8,7 @@ function InteractiveButtons(props) {
   } else if(props.tamagotchi.sleeping === false && props.tamagotchi.alive === true) {
     sleepButtonText = 'Take A Nap';
   } else {
-    sleepButtonText = 'RIP';
+    sleepButtonText = 'Reset';
   }
   return(
     <div>

@@ -2,16 +2,17 @@ import React from 'react';
 import PetStats from './PetStats';
 import InteractiveButtons from './InteractiveButtons';
 import DynamicImage from './DynamicImage';
-import 'chance';
+import { Chance } from 'chance';
 
 class App extends React.Component {
   constructor (props) {
     super(props);
+    this.chance = new Chance();
     this.state = {
       tamagotchi:
       {
         age: 0,
-        name: chance.name({middle_initial: true}),
+        name: this.chance.name({middle_initial: true}),
         weight: 10,
         hunger: 30,
         happiness: 50,
@@ -28,6 +29,7 @@ class App extends React.Component {
     this.handleMood = this.handleMood.bind(this);
     this.handleAging = this.handleAging.bind(this);
   }
+
 
   componentDidMount() {
     this.intervalAge = setInterval(() =>
