@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function PetStats(props) {
   return(
     <div>
-      <h1>this is the petview</h1>
+      <h1>{props.tamagotchi.name}</h1>
       <p>Age: {props.tamagotchi.age}</p>
       <p>Weight: {props.tamagotchi.weight}</p>
       <p>Hunger: {props.tamagotchi.hunger}</p>

@@ -2,6 +2,7 @@ import React from 'react';
 import PetStats from './PetStats';
 import InteractiveButtons from './InteractiveButtons';
 import DynamicImage from './DynamicImage';
+import 'chance';
 
 class App extends React.Component {
   constructor (props) {
@@ -10,6 +11,7 @@ class App extends React.Component {
       tamagotchi:
       {
         age: 0,
+        name: chance.name({middle_initial: true}),
         weight: 10,
         hunger: 30,
         happiness: 50,
@@ -24,9 +26,14 @@ class App extends React.Component {
     this.handlePlay = this.handlePlay.bind(this);
     this.handleSleep = this.handleSleep.bind(this);
     this.handleMood = this.handleMood.bind(this);
+    this.handleAging = this.handleAging.bind(this);
   }
 
   componentDidMount() {
+    this.intervalAge = setInterval(() =>
+      this.handleAging(),
+    3000
+    );
     this.intervalEnergy = setInterval(() =>
       this.handleUpdateEnergy(),
     1000
@@ -61,7 +68,7 @@ class App extends React.Component {
 
   handlePlay() {
     let updatedStats = Object.assign({}, this.state.tamagotchi);
-    if( updatedStats.happiness != 100 && updatedStats.sleeping === false && updatedStats.alive === true) {
+    if( updatedStats.happiness != 100 && updatedStats.sleeping === false && updatedStats.energy !=0) {
       updatedStats.happiness+=10;
       updatedStats.energy-=10;
       this.setState({tamagotchi: updatedStats});
@@ -71,6 +78,12 @@ class App extends React.Component {
   handleSleep() {
     let updatedStats = Object.assign({}, this.state.tamagotchi);
     updatedStats.sleeping = !updatedStats.sleeping;
+    this.setState({tamagotchi: updatedStats});
+  }
+
+  handleAging() {
+    let updatedStats = Object.assign({}, this.state.tamagotchi);
+    updatedStats.age++;
     this.setState({tamagotchi: updatedStats});
   }
 
@@ -86,6 +99,9 @@ class App extends React.Component {
       } else if (updatedStats.energy < 30 && updatedStats.energy >0) {
         updatedStats.mood = 'stressed';
       }
+      this.setState({tamagotchi: updatedStats});
+    } else {
+      updatedStats.mood = 'dead';
       this.setState({tamagotchi: updatedStats});
     }
   }
