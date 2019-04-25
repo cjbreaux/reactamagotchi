@@ -23,14 +23,22 @@ class App extends React.Component {
     this.handleSleep = this.handleSleep.bind(this);
   }
 
-
+  componentDidMount() {
+    this.intervalStats = setInterval(() =>
+      this.handleUpdateStats(),
+    2000
+    );
+  }
 
   handleUpdateStats() {
     let updatedStats = Object.assign({}, this.state.tamagotchi);
-    if(updatedStats.energy != 0) {
+    if(updatedStats.energy != 0 && updatedStats.sleeping === false) {
       updatedStats.energy--;
-      this.setState({tamagotchi: updatedStats});
+    } else if (updatedStats.energy != 0 && updatedStats.sleeping === true && updatedStats.energy != 10) {
+      updatedStats.energy++;
     }
+
+    this.setState({tamagotchi: updatedStats});
   }
 
   handleFeed() {
@@ -43,8 +51,9 @@ class App extends React.Component {
 
   handlePlay() {
     let updatedStats = Object.assign({}, this.state.tamagotchi);
-    if(updatedStats.happiness != 10 ) {
+    if( updatedStats.happiness != 10) {
       updatedStats.happiness++;
+      updatedStats.energy--;
       this.setState({tamagotchi: updatedStats});
     }
   }
@@ -52,6 +61,9 @@ class App extends React.Component {
   handleSleep() {
     let updatedStats = Object.assign({}, this.state.tamagotchi);
     updatedStats.sleeping = !updatedStats.sleeping;
+    // if(updatedStats.sleeping === true) {
+    //   updatedStats.energy = 10;
+    // }
     this.setState({tamagotchi: updatedStats});
   }
 

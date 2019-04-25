@@ -20,6 +20,7 @@ function InteractiveButtons(props) {
 InteractiveButtons.propTypes = {
   onUpdateStats: PropTypes.func,
   onFeed: PropTypes.func,
+  onPlay: PropTypes.func,
   onSleep: PropTypes.func,
   tamagotchi: PropTypes.object
 };
