@@ -123,7 +123,7 @@ class App extends React.Component {
     if (!updatedStats.alive) {
       updatedStats.age = 0;
       updatedStats.name = this.chance.name({middle_initial: true});
-      updatedStats.hunger = 30;
+      updatedStats.hunger = 3;
       updatedStats.happiness = 50;
       updatedStats.energy = 100;
       updatedStats.sleeping = false;
