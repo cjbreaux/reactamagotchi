@@ -6,32 +6,33 @@ class App extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      petInfo: [
+      tamagotchi:
       {
-      age: 10,
-      weight: 10,
-      hunger: 5,
-      happiness: 5
+        age: 10,
+        weight: 10,
+        hunger: 5,
+        happiness: 5,
+        energy: 10,
+        sleeping: false,
+        alive: true
       }
-      ]
     };
-    this.updateWeight = this.updateWeight.bind(this);
+    this.handleUpdateStats = this.handleUpdateStats.bind(this);
   }
 
 
 
-  updateWeight() {
-    let newPetInfo = this.state.petInfo.slice();
-    newPetInfo[0].weight--;
-    this.setState({petInfo: newPetInfo});
-
+  handleUpdateStats() {
+    let updatedStats = Object.assign({}, this.state.tamagotchi);
+    updatedStats.hunger--;
+    this.setState({tamagotchi: updatedStats});
   }
 
   render(){
     return(
       <div>
-        <PetView petInfo={this.state.petInfo}/>
-        <InteractiveButtons onUpdateWeight={this.updateWeight} />
+        <PetView tamagotchi={this.state.tamagotchi}/>
+        <InteractiveButtons onUpdateStats={this.handleUpdateStats} />
       </div>
     );
   }
