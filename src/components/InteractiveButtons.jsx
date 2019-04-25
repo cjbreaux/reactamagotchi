@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 
 function InteractiveButtons(props) {
   let sleepButtonText = null;
-  if(props.tamagotchi.sleeping) {
+  if(props.tamagotchi.sleeping === true && props.tamagotchi.energy != 0) {
     sleepButtonText = 'Wake Up';
-  } else {
+  } else if(props.tamagotchi.sleeping === false && props.tamagotchi.energy != 0) {
     sleepButtonText = 'Take A Nap';
+  } else {
+    sleepButtonText = 'RIP';
   }
   return(
     <div>
@@ -18,7 +20,6 @@ function InteractiveButtons(props) {
 }
 
 InteractiveButtons.propTypes = {
-  onUpdateStats: PropTypes.func,
   onFeed: PropTypes.func,
   onPlay: PropTypes.func,
   onSleep: PropTypes.func,
