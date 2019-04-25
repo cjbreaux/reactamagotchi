@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function InteractiveButtons(props) {
   let sleepButtonText = null;
   if(props.tamagotchi.sleeping === true && props.tamagotchi.alive === true) {
-    sleepButtonText = <button onClick={props.onSleep}>Sleep</button>;
+    sleepButtonText = <button onClick={props.onSleep}>Wake Up</button>;
   } else if(props.tamagotchi.sleeping === false && props.tamagotchi.alive === true) {
     sleepButtonText = <button onClick={props.onSleep}>Take A Nap</button>;
   } else {

@@ -14,7 +14,7 @@ class App extends React.Component {
         age: 0,
         name: this.chance.name({middle_initial: true}),
         weight: 10,
-        hunger: 30,
+        hunger: 3,
         happiness: 50,
         energy: 100,
         sleeping: false,
@@ -47,6 +47,12 @@ class App extends React.Component {
     );
   }
 
+  componentWillUnmount(){
+    clearInterval(this.intervalAge);
+    clearInterval(this.intervalEnergy);
+    clearInterval(this.intervalMood);
+  }
+
   //need to clearInterval for functions at some point
 
   handleUpdateEnergy() {
@@ -63,8 +69,8 @@ class App extends React.Component {
 
   handleFeed() {
     let updatedStats = Object.assign({}, this.state.tamagotchi);
-    if(updatedStats.hunger >= 0 && updatedStats.sleeping === false && updatedStats.alive === true) {
-      updatedStats.hunger-=10;
+    if(updatedStats.hunger > 0 && updatedStats.sleeping === false && updatedStats.alive === true) {
+      updatedStats.hunger--;
       this.setState({tamagotchi: updatedStats});
     }
   }
